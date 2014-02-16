@@ -69,8 +69,12 @@ public class ToDoManagerActivity extends ListActivity {
 				log("Entered footerView.OnClickListener.onClick()");
 
 				//TODO - Attach Listener to FooterView. Implement onClick().
-				String l = new String("You clicked the Textview");
-			    Toast.makeText(this, "You Clicked it"  , Toast.LENGTH_LONG).show();
+				
+				Intent footerIntent = new Intent(getApplicationContext(), AddToDoActivity.class);
+				startActivityForResult(footerIntent, ADD_TODO_ITEM_REQUEST);
+				
+				
+			    Toast.makeText(getApplicationContext(), "You Clicked it"  , Toast.LENGTH_LONG).show();
 
 			}
 		});

@@ -48,6 +48,7 @@ public class ToDoManagerActivity extends ListActivity {
 
 		// Create a new TodoListAdapter for this ListActivity's ListView
 		mAdapter = new ToDoListAdapter(getApplicationContext());
+		
 
 		// Put divider between ToDoItems and FooterView
 		getListView().setFooterDividersEnabled(true);
@@ -74,14 +75,14 @@ public class ToDoManagerActivity extends ListActivity {
 				startActivityForResult(footerIntent, ADD_TODO_ITEM_REQUEST);
 				
 				
-			    Toast.makeText(getApplicationContext(), "You Clicked it"  , Toast.LENGTH_LONG).show();
+			    //Toast.makeText(getApplicationContext(), "You Clicked it"  , Toast.LENGTH_LONG).show();
 
 			}
 		});
 
 		//TODO - Attach the adapter to this ListActivity's ListView
-		setListAdapter(mAdapter);
 
+		this.getListView().setAdapter(mAdapter);
 	}
 
 	@Override
@@ -93,7 +94,28 @@ public class ToDoManagerActivity extends ListActivity {
 		// If user submitted a new ToDoItem
 		// Create a new ToDoItem from the data Intent
 		// and then add it to the adapter
+		
+		//check which request we are responding to
 
+		//Toast.makeText(getApplicationContext(), "requestCode Returned:" + requestCode , Toast.LENGTH_LONG);
+		
+		
+		if(requestCode == ADD_TODO_ITEM_REQUEST)
+		{
+			//Make sure the request was successful
+			if(resultCode == RESULT_OK )
+			{
+		
+				//Toast.makeText(getApplicationContext(), "ActivityResult:GOOD", Toast.LENGTH_LONG);
+				ToDoItem item = new ToDoItem(data);
+				mAdapter.add(item);
+				
+			}//request code
+			
+		}//resultCode
+		
+		
+		
 	}
 
 	// Do not modify below here

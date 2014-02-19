@@ -20,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import course.labs.todomanager.ToDoItem.Priority;
 import course.labs.todomanager.ToDoItem.Status;
 
@@ -93,6 +94,9 @@ public class AddToDoActivity extends Activity {
 				log("Entered cancelButton.OnClickListener.onClick()");
 
 				//TODO - Implement onClick().  
+				Intent cancel = new Intent();
+				setResult(RESULT_CANCELED, cancel);
+				finish();
 
 			}
 		});
@@ -106,9 +110,14 @@ public class AddToDoActivity extends Activity {
 				log("Entered resetButton.OnClickListener.onClick()");
 
 				//TODO - Reset data fields to default values
-				
-
+				setDefaultDateTime();
+				Toast.makeText(getApplicationContext(), "Reset Button Clicked", Toast.LENGTH_LONG);
+				mTitleText.setText("Enter Title");
+				mStatusRadioGroup.check(R.id.statusNotDone);
+				mPriorityRadioGroup.check(R.id.medPriority);
+ 
 			
+				
 			
 			
 			}
@@ -127,12 +136,16 @@ public class AddToDoActivity extends Activity {
 				
 				//TODO - Get Priority
 				Priority priority = null;
+				priority = getPriority();
 
+				
 				//TODO -  Get Status
 				Status status = null;
+				status = getStatus();
 
 				//TODO -  Title
 				String titleString = null;
+				titleString = mTitleText.getText().toString();
 
 				// Date
 				String fullDate = dateString + " " + timeString;
@@ -143,6 +156,7 @@ public class AddToDoActivity extends Activity {
 
 				//TODO - return data Intent and finish
 				setResult(RESULT_OK, data);
+				finish();
 			
  
 			    
